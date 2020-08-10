@@ -18,12 +18,6 @@ def get_countries_and_cities_from_mongo_to_sqlite():
     table = db.geo
     table_name = table.find()
     for record in table_name:
-        info = {}
-        countries = Country.objects.all()
-        for _record in countries:
-            info[_record.name] = True
-        if record['countryName'] in info:
-            continue
         country = Country.objects.create(
             name=record['countryName'], code=record['countryCode'], currency=record['countryCurrency']
         )
